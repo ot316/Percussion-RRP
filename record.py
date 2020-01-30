@@ -7,7 +7,7 @@ chans = 1 # 1 channel
 samp_rate = 44100 # 44.1kHz sampling rate
 chunk = 4096 # 2^12 samples for buffer
 try:
-    record_secs = sys.argv[0] # seconds to record
+    record_secs = int(sys.argv[0]) # seconds to record
 except:
     print("Please specify recording time with -<number of seconds> argument")
     exit()
