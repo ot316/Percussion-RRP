@@ -6,6 +6,7 @@ try:
     fs, data = wavfile.read(str(sys.argv[1])) # load the data
 except: 
     print("specify filename as argument")
+    exit()
 a = data.T[0] # this is a two channel soundtrack, I get the first track
 b=[(ele/2**8.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
 c = fft(b) # calculate fourier transform (complex numbers list)
