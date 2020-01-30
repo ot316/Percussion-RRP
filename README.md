@@ -1,2 +1,2 @@
 Use:
-python record.py -number of seconds
+python record.py [number of seconds]

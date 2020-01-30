@@ -9,7 +9,7 @@ chunk = 4096 # 2^12 samples for buffer
 try:
     record_secs = int(sys.argv[1]) # seconds to record
 except:
-    print("Please specify recording time with -<number of seconds> argument")
+    print("Please specify recording time with <number of seconds> argument")
     exit()
     
 dev_index = 2 # device index found by p.get_device_info_by_index(ii)
