@@ -1,11 +1,17 @@
 import pyaudio
 import wave
+import sys
 
 form_1 = pyaudio.paInt16 # 16-bit resolution
 chans = 1 # 1 channel
 samp_rate = 44100 # 44.1kHz sampling rate
 chunk = 4096 # 2^12 samples for buffer
-record_secs = 10 # seconds to record
+try:
+    record_secs = sys.argv[0] # seconds to record
+except:
+    print("Please specify recording time with -<number of seconds> argument")
+    exit()
+    
 dev_index = 2 # device index found by p.get_device_info_by_index(ii)
 wav_output_filename = 'test.wav' # name of .wav file
 
