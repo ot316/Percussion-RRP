@@ -13,7 +13,7 @@ except:
     exit()
     
 dev_index = 2 # device index found by p.get_device_info_by_index(ii)
-wav_output_filename = 'test.wav' # name of .wav file
+wav_output_filename = str(sys.argv[2]) # name of .wav file
 
 audio = pyaudio.PyAudio() # create pyaudio instantiation
 
