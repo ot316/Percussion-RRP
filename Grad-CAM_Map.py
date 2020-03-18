@@ -21,7 +21,7 @@ model.load_weights("model_weights.h5")
 print("Loaded model and weights")
 
 # Find the index of the to be visualized layer above
-layer_index = utils.find_layer_idx(model, 'visualized_layer')
+layer_index = utils.find_layer_idx(model, 'visualized_layer_4')
 
 # Swap softmax with linear
 model.layers[layer_index].activation = activations.linear
@@ -40,7 +40,7 @@ for index_to_visualize in indices_to_visualize:
     fig, axes = plt.subplots(1, 3)
     # Generate visualization
     visualization = visualize_cam(model, layer_index, filter_indices=input_class, seed_input=input_image)
-    axes[0].imshow(input_image[..., 0], cmap='gray') 
+    axes[0].imshow(input_image[..., 0], cmap='viridis') 
     axes[0].set_title('Input')
     axes[1].imshow(visualization)
     axes[1].set_title('Grad-CAM')

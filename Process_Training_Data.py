@@ -6,8 +6,8 @@ import cv2
 from sklearn.model_selection import train_test_split
 from keras.utils import np_utils
 
-fars = (".//AudioFiles 05.02.20/silicon1nodulefar1", ".//AudioFiles 05.02.20/silicon1nodulefar2", ".//AudioFiles 05.02.20/silicon1nodulefar3" )
-closes = (".//AudioFiles 05.02.20/silicon1noduleclose1", ".//AudioFiles 05.02.20/silicon1noduleclose2", ".//AudioFiles 05.02.20/silicon1noduleclose3" )
+fars = (".//AudioFiles 10.03.20/No_Nodule_taps")
+closes = (".//AudioFiles 10.03.20/Nodule_taps")
 
 X = []
 y = []
@@ -15,23 +15,21 @@ num_labels = 2
 
 #iterate through files in folder for far
 farcount = 0
-for far in fars:
-    for root, dirs, files in os.walk(far):
-        for file in files:
-            if file.endswith(".png"):
-                X.append(cv2.imread(far + '/' + file)/255) #add images to t
-                farcount +=1                
+for root, dirs, files in os.walk(fars):
+    for file in files:
+        if file.endswith(".png"):
+            X.append(cv2.imread(fars + '/' + file)/255) #add images to t
+            farcount +=1                
 [y.append(0) for i in range(farcount)]
 
 
 #iterate through files in folder for far
 closecount = 0
-for close in closes:
-    for root, dirs, files in os.walk(close):
-        for file in files:
-            if file.endswith(".png"):
-                X.append(cv2.imread(close + '/' + file)/255) #add images to t
-                closecount +=1
+for root, dirs, files in os.walk(closes):
+    for file in files:
+        if file.endswith(".png"):
+            X.append(cv2.imread(closes + '/' + file)/255) #add images to t
+            closecount +=1
                 
 [y.append(1) for i in range(closecount)]
 

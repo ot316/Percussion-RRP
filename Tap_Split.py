@@ -13,8 +13,8 @@ def match_target_amplitude(atap, target_dBFS):
     return atap.apply_gain(change_in_dBFS)
 
 # Load long audio taps.
-filepath = ("AudioFiles 05.02.20/")
-filename = ("silicon1nodulefar3.wav")
+filepath = ("AudioFiles 10.03.20/")
+filename = ("No_Nodule_taps.wav")
 song = AudioSegment.from_wav(filepath + filename)
 print("loaded audio")
 
@@ -22,10 +22,10 @@ print("loaded audio")
 taps = split_on_silence (
     # Use the loaded audio.
     song, 
-    # Specify that a silent tap must be at least 2 seconds or 2000 ms long.
+    # Specify silent tap
     min_silence_len = 200,
     # Consider a tap silent if it's quieter than -60 dBFS.
-    silence_thresh = -60
+    silence_thresh = -30
 )
 
 

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import cv2
 from vis.visualization import visualize_saliency
 from vis.utils import utils
 from keras.models import model_from_json
@@ -20,14 +21,14 @@ model.load_weights("model_weights.h5")
 print("Loaded model and weights")
 
 # Find the index of the to be visualized layer above
-layer_index = utils.find_layer_idx(model, 'visualized_layer')
+layer_index = utils.find_layer_idx(model, 'visualized_layer_4')
 
 # Swap softmax with linear
 model.layers[layer_index].activation = activations.linear
 model = utils.apply_modifications(model)
 
 # Numbers to visualize
-indices_to_visualize = [0,1,2,3,4,5,6,7,8,9,10]
+indices_to_visualize = [0,1,2,3,44]
 
 # Visualize
 for index_to_visualize in indices_to_visualize:
@@ -38,8 +39,10 @@ for index_to_visualize in indices_to_visualize:
     fig, axes = plt.subplots(1, 2)
     # Generate visualization
     visualization = visualize_saliency(model, layer_index, filter_indices=input_class, seed_input=input_image)
-    axes[0].imshow(input_image[..., 0]) 
+    plt.set_cmap('viridis_r')
+    axes[0].imshow(input_image[..., 0])
     axes[0].set_title('Original image')
+    plt.set_cmap('viridis')
     axes[1].imshow(visualization)
     axes[1].set_title('Saliency map')
     if input_class == 1 :

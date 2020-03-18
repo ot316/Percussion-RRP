@@ -10,7 +10,7 @@ import numpy as np
 
 #define folder path
 
-filepath = (".//AudioFiles 05.02.20/silicon1noduleclose3")
+filepath = (".//AudioFiles 10.03.20/Nodule_taps")
 
 #iterate through files in folder
 for root, dirs, files in os.walk(filepath):
@@ -19,6 +19,7 @@ for root, dirs, files in os.walk(filepath):
             sample_rate, samples = wavfile.read(filepath + "/" + file)
             frequencies, times, spectrogram = signal.spectrogram(samples,sample_rate,nfft=1024,noverlap=900, nperseg=1024)
             #plt.axis('off')
+            plt.set_cmap('viridis_r')
             plt.title("Example Spectrogram of Close Nodule")
             plt.pcolormesh(times, frequencies, 10*np.log10(spectrogram))
             plt.colorbar(format='%+2.0f dB');
