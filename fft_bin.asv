@@ -1,93 +1,70 @@
-    fbin0avgclose = zeros(1,604);
-    fbin1avgclose = zeros(1,604);
-    fbin2avgclose = zeros(1,604);
-    fbin3avgclose = zeros(1,604);;
-    fbin4avgclose = zeros(1,604);;
-    fbin5avgclose = zeros(1,604);
-    fbin6avgclose = zeros(1,604);
-    fbin7avgclose = zeros(1,604);
-    fbin8avgclose = zeros(1,604);
-    fbin9avgclose = zeros(1,604);
-    fbin10avgclose = zeros(1,604);
-    
-    fbin0avgfar = zeros(1,1247);
-    fbin1avgfar = zeros(1,1247);
-    fbin2avgfar = zeros(1,1247);
-    fbin3avgfar = zeros(1,1247);
-    fbin4avgfar = zeros(1,1247);
-    fbin5avgfar = zeros(1,1247);
-    fbin6avgfar = zeros(1,1247);
-    fbin7avgfar = zeros(1,1247);
-    fbin8avgfar = zeros(1,1247);
-    fbin9avgfar = zeros(1,1247);
-    fbin10avgfar = zeros(1,1247);
-    
-for i = 0:603
+numberofbins = 500;
+f_bin_avg_close = zeros(604,numberofbins);
+f_bin_avg_far = zeros(1247,numberofbins);
+
+%% First Data set
+for i = 0:20
     [data,fs]=audioread(sprintf('AudioFiles 10.03.20/Nodule_taps/Nodule_tapstap%d.wav', i));                
     T = 1/fs;             % Sampling period       
     L = length(data);     % Length of signal
     t = (0:L-1)*T;        % Time vector
 
-    data_fft = fft(data);
+    data_fft = fft(data); % perform fourier transform
     P2 = abs(data_fft/L);
     P1 = P2(1:L/2+1);
-    P1(2:end-1) = 2*P1(2:end-1);
-    %f = fs*(0:(L/2))/L;
+    P1(2:end-1) = 2*P1(2:end-1); % disregard negative time
     
-    %10 frequency bins
-    fbin0avgclose = [fbin0avgclose, mean(P1(1:10))];
-    fbin1avgclose = [fbin1avgclose, mean(P1(10:20))];
-    fbin2avgclose = [fbin2avgclose, mean(P1(20:30))];
-    fbin3avgclose = [fbin3avgclose, mean(P1(30:40))];
-    fbin4avgclose = [fbin4avgclose, mean(P1(40:50))];
-    fbin5avgclose = [fbin5avgclose, mean(P1(50:60))];
-    fbin6avgclose = [fbin6avgclose, mean(P1(60:70))];
-    fbin7avgclose = [fbin7avgclose, mean(P1(70:80))];
-    fbin8avgclose = [fbin8avgclose, mean(P1(80:90))];
-    fbin9avgclose = [fbin9avgclose, mean(P1(90:100))];
-    fbin10avgclose = [fbin10avgclose, mean(P1(100:4477))];
-       
+    binwidth = length(P1)/numberofbins;
+    column = 1;
+    oldii = 1;
+
+    for ii = 1:binwidth:length(P1)
+        f_bin_avg_close(i+1,column) = mean(P1(oldii:ii));
+        oldii = ii;
+        column = column + 1;
+    end      
 end
 
-for i = 0:1247
+%% second dataset
+for i = 0:20
     [data,fs]=audioread(sprintf('AudioFiles 10.03.20/No_Nodule_taps/No_Nodule_tapstap%d.wav', i));                
-    T = 1/fs;             % Sampling period       
-    L = length(data);             % Length of signal
-    t = (0:L-1)*T;        % Time vector
+    T = 1/fs;         
+    L = length(data);            
+    t = (0:L-1)*T;        
 
     data_fft = fft(data);
     P2 = abs(data_fft/L);
     P1 = P2(1:L/2+1);
     P1(2:end-1) = 2*P1(2:end-1);
-    %f = fs*(0:(L/2))/L;
     
-     %10 frequency bins
-    fbin0avgfar = [fbin0avgfar, mean(P1(1:10))];
-    fbin1avgfar = [fbin1avgfar, mean(P1(10:20))];
-    fbin2avgfar = [fbin2avgfar, mean(P1(20:30))];
-    fbin3avgfar = [fbin3avgfar, mean(P1(30:40))];
-    fbin4avgfar = [fbin4avgfar, mean(P1(40:50))];
-    fbin5avgfar = [fbin5avgfar, mean(P1(50:60))];
-    fbin6avgfar = [fbin6avgfar, mean(P1(60:70))];
-    fbin7avgfar = [fbin7avgfar, mean(P1(70:80))];
-    fbin8avgfar = [fbin8avgfar, mean(P1(80:90))];
-    fbin9avgfar = [fbin9avgfar, mean(P1(90:100))];
-    fbin10avgfar = [fbin10avgfar, mean(P1(1001:4477))];
+    binwidth = length(P1)/numberofbins;
+    column = 1;
+    oldii = 1;
+
+    for ii = 1:binwidth:length(P1)
+        f_bin_avg_far(i+1,column) = mean(P1(oldii:ii));
+        oldii = ii;
+        column = column + 1;
+    end   
     
 end
 
 %% statistical testing
 
-[h,p] = ttest2(fbin0avgfar, fbin0avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin1avgfar, fbin1avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin2avgfar, fbin2avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin3avgfar, fbin3avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin4avgfar, fbin4avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin5avgfar, fbin5avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin6avgfar, fbin6avgclose, 'Alpha', 0.001)
-[h,p] = ttest2(fbin7avgfar, fbin7avgclose, 'Alpha', 0.001)
-[h,p] = rtest2(fbin8avgfar, fbin8avgclose, 'Alpha', 0.001)
-[h,p] = vartest2(fbin9avgfar, fbin9avgclose, 'Alpha', 0.001)
-[h,p] = vartest2(fbin10avgfar, fbin10avgclose, 'Alpha', 0.001)
+ttest2matrix = zeros(numberofbins, 3);
+ttest2matrix(1,0) = 'Frequency Range'
+ttest2matrix(2,0) = 'statistically significant?'
+ttest2matrix(3,0) = 'p - value'
+
+
+for i = 2:numberofbins+1
+    [h,p] = ttest2(f_bin_avg_far(:,i), f_bin_avg_close(:,i), 'Alpha', 0.005);
+    ttest2matrix(i,1) = sprintf('%d - %d', f(22500/oldi), f(22500/i))
+    ttest2matrix(i,2) = h;
+    ttest2matrix(i,3) = p;
+    oldi = i
+end
+
+
 
 
