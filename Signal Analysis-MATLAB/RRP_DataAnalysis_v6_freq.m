@@ -6,7 +6,7 @@ clear all;
 % Close Nodules .WAV
 for k = 1:15
     % Create an audio file name, and read the file.
-	audionameA1 = ['siliconnoduleclose1_' num2str(k) '.wav'];
+	audionameA1 = ['./siliconnoduleclose1_' num2str(k) '.wav'];
     
 	if exist(audionameA1, 'file')        
         [A{k},fs_now] = audioread(audionameA1);
@@ -226,9 +226,9 @@ xlabel('Sample(time)');
 ylabel('Amplitude')
 title('S-Golay Filtering')
 
-It seems like S-Golay is not able to smooth the signal as much as we'd
-like. This is expected as it is more effective at preserving high frequency 
-signal components but less successful at rejecting noise. This is OK.
+% %It seems like S-Golay is not able to smooth the signal as much as we'd
+% like. This is expected as it is more effective at preserving high frequency 
+% signal components but less successful at rejecting noise. This is OK.
 
 % From here
 %% ======================================== Spectogram ========================================

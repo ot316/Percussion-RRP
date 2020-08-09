@@ -1,5 +1,5 @@
-numberofbins = 500;
-numberoffiles = 40;
+numberofbins = 30;
+numberoffiles = 100;
 f_bin_avg_close = zeros(604,numberofbins);
 f_bin_avg_far = zeros(1247,numberofbins);
 
@@ -53,7 +53,6 @@ end
 %% statistical testing
 
 ttest2matrix = zeros(numberofbins, 3);
-
 
 for i = 2:numberofbins+1
     [h,p] = ttest2(f_bin_avg_far(:,i-1), f_bin_avg_close(:,i-1), 'Alpha', 0.005);
