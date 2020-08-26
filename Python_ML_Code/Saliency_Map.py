@@ -28,7 +28,7 @@ model.layers[layer_index].activation = activations.linear
 model = utils.apply_modifications(model)
 
 # Numbers to visualize
-indices_to_visualize = [0,1,2,3,44]
+indices_to_visualize = [0,100,16,133,44]
 
 # Visualize
 for index_to_visualize in indices_to_visualize:
