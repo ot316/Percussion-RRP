@@ -23,8 +23,8 @@ y_test = np.load('y_test.npy')
 
 
 # Model configuration
-img_width, img_height = 496, 369
-batch_size = 200
+img_width, img_height = 875, 656
+batch_size = 100
 no_epochs = 9
 no_classes = 2
 verbosity = 1
