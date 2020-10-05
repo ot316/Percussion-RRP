@@ -6,7 +6,7 @@ The project is split into 2 research papers. The first one is titled: **Design a
 and examines how we modelled the dynamics of medical percussion using Matlab and used this simulation to inform the design of a robotic percussion device. 
 Video is available [here.][1]  
 
-<embed src="https://github.com/ot316/Percussion-RRP/blob/master/Poster_1st.pdf" width="800"/>  
+<embed src="https://github.com/ot316/Percussion-RRP/blob/master/Poster_1st.pdf" alt="poster" width="800"/>  
 
 ## Paper 2
 The second paper is titled **Acoustic Response Analysis of Medical Percussion using Wavelet Transform and Neural Networks** and details how we collected data from the previously developed percussion device and analysed the acoustic response using wavelet transform and neural networks.
