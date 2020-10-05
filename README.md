@@ -1,3 +1,4 @@
+## Medical Percussion Robotics Research Project
 This is the code repository containing all code and data for our medical percussion robotics research project.
 
 The project is split into 2 research papers. The first one is titled: **Design and Implementation of a Robotic Device for Medical Percussion**
