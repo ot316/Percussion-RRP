@@ -6,7 +6,7 @@ and examines how we modelled the dynamics of medical percussion using Matlab and
 Video is available [here.][1]  
 
 The second paper is titled **Acoustic Response Analysis of Medical Percussion using Wavelet Transform and Neural Networks** and details how we collected data from the previously developed percussion device and analysed the acoustic response using wavelet transform and neural networks.
-Video is available [here][2]  
+Video is available [here.][2]  
 
 [1]: https://www.youtube.com/watch?v=4OFo_bktEWM
 [2]:  https://www.youtube.com/watch?v=4l1HhkSkm_w
