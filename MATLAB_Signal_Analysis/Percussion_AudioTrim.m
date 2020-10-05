@@ -14,7 +14,7 @@
 
 %% Plot original audio signal
 % Import file
-audiofile = 'siliconnodulefar3.wav';
+audiofile = 'Nodule_taps_short.wav';
 [A,fs] = audioread(audiofile);  
 
 dt = 1/fs;
@@ -128,7 +128,7 @@ sth = wrcoef('a',C1,L1,'db8',i); %Reconstruction of the i-th level
 %%'a' for approximation and 'd' for detail reconstruction
 end
 
-plot(A,'k-','linewidth',3);hold on;plot(sth,'b-','linewidth',3);
+plot(A,'k-','linewidth',1);hold on;plot(sth,'b-','linewidth',3);
 legend('Original','Filtered')
 xlabel('Sample','fontsize',16)
 ylabel('Amplitude','fontsize',16)
@@ -137,9 +137,9 @@ set(gca,'fontsize',16)
 
 %% Find the peaks in the signal
 figure(5);
-[pks, locs] = findpeaks(sth,t,'MinPeakDistance',0.15,'MinPeakProminence',0.009); % Find prominent peaks
+[pks, locs] = findpeaks(sth,t,'MinPeakDistance',0.7,'MinPeakProminence',0.009); % Find prominent peaks
 
-findpeaks(sth,t,'MinPeakDistance',0.15,'MinPeakProminence',0.009,'Annotate','extents','WidthReference','halfheight') %Plot peaks
+findpeaks(sth,t,'MinPeakDistance',0.7,'MinPeakProminence',0.009,'Annotate','extents','WidthReference','halfheight') %Plot peaks
 text(locs+.02,pks,num2str((1:numel(pks))')) % Label them
 
 xlabel('Sample(time)');
@@ -165,7 +165,7 @@ for k = 1:npks-1
     end_idx = find(t==trim_times(k+1));
     
     % We don't want to trim starting or ending from local maximas, but before that
-    margin_end = 2000;
+    margin_end = 1998;
     
     margin_start_idx = round(start_idx - 100);
     margin_end_idx = round(end_idx - margin_end);
