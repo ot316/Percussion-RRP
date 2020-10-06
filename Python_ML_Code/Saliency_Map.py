@@ -39,10 +39,10 @@ for index_to_visualize in indices_to_visualize:
     fig, axes = plt.subplots(1, 2)
     # Generate visualization
     visualization = visualize_saliency(model, layer_index, filter_indices=input_class, seed_input=input_image)
-    plt.set_cmap('viridis_r')
+    plt.set_cmap('gray')
     axes[0].imshow(input_image[..., 0])
     axes[0].set_title('Original image')
-    plt.set_cmap('viridis')
+    plt.set_cmap('seismic')
     axes[1].imshow(visualization)
     axes[1].set_title('Saliency map')
     if input_class == 1 :

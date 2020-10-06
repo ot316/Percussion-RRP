@@ -5,9 +5,9 @@ import os
 import cv2
 from sklearn.model_selection import train_test_split
 from keras.utils import np_utils
-print("here")
-fars = ("../Audio_Files_10.03.20_Experiment_Scalograms/No_Nodule_taps/")
-closes = ("../Audio_Files_10.03.20_Experiment_Scalograms/Nodule_taps/")
+
+fars = ("../Audio_Files_10.03.20_Experiment_Scalograms/No_Nodule_taps/Trimmed_Scalograms")
+closes = ("../Audio_Files_10.03.20_Experiment_Scalograms/Nodule_taps/Trimmed_Scalograms")
 
 X = []
 y = []
