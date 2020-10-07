@@ -1,3 +1,6 @@
+# Author: Oli Thompson
+# load the model and plot the Saliency map for an array of data points.
+
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2

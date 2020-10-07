@@ -1,3 +1,5 @@
+# Author: Oli Thompson
+# Return the accuracy metrics of the neural network by testing it on the test data.
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense

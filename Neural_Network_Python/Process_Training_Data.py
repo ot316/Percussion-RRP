@@ -1,3 +1,4 @@
+# Author: Oli Thompson
 # Process the spectrogram images into labelled training and testing data and save the arrays.
 
 import numpy as np

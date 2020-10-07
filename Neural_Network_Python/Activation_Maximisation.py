@@ -1,3 +1,6 @@
+# Author: Oli Thompson
+# This code loads the model and plots the activation maximisation for the final layer
+
 import matplotlib.pyplot as plt
 import numpy as np
 from vis.visualization import visualize_activation
