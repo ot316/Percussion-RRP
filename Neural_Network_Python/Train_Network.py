@@ -1,3 +1,4 @@
+# Author: Oli Thompson
 # train the neural network
 
 import keras
