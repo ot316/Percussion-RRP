@@ -1,9 +1,14 @@
+% Author: Oli Thompson
+% This code computes the fourier transform of the first 100 audio recordings of both close and far nodules.
+% The code then conducts 2 sample ttest statistical hypothesis testing.
+
+
 numberofbins = 30;
 numberoffiles = 100;
 f_bin_avg_close = zeros(604,numberofbins);
 f_bin_avg_far = zeros(1247,numberofbins);
 
-%% First Data set
+%% First Dataset
 for i = 0:numberoffiles
     [data,fs]=audioread(sprintf('AudioFiles 10.03.20/Nodule_taps/Nodule_tapstap%d.wav', i));                
     T = 1/fs;             % Sampling period       
@@ -26,7 +31,7 @@ for i = 0:numberoffiles
     end      
 end
 
-%% second dataset
+%% Ssecond Dataset
 for i = 0:numberoffiles
     [data,fs]=audioread(sprintf('AudioFiles 10.03.20/No_Nodule_taps/No_Nodule_tapstap%d.wav', i));                
     T = 1/fs;         
@@ -50,7 +55,7 @@ for i = 0:numberoffiles
     
 end
 
-%% statistical testing
+%% statistical hypothesis testing
 
 ttest2matrix = zeros(numberofbins, 3);
 
