@@ -6,8 +6,8 @@ clear all;
 AudioData=dir('RRP Final Percussion Recordings');
 AudioData([AudioData.isdir]==1)=[];
 
-VarNames = {'Sample', 'Type','Depth','RawData','SG_Data','fs','Clips'};
-VarTypes = {'cellstr','cellstr','cellstr','cell','cell','cell','cell'};
+VarNames = {'Sample', 'Type','Depth','RawData','NormData','SG_Data','fs','Clips'};
+VarTypes = {'cellstr','cellstr','cellstr','cell','cell','cell','cell','cell'};
 T = table('Size', [0 length(VarNames)],'VariableNames', VarNames, 'VariableTypes', VarTypes);
 
 %% Read the data, filter it, and read into a table  T 
@@ -22,6 +22,9 @@ for i=1:length(AudioData)-1
     [dat,fs_now] = audioread([filepath filesep filename]);
     dat_sg = sgolayfilt(dat,SG_order,SG_framelen);
     
+    dat_norm = normalize(dat); 
+%     dat_norm = normalize(dat, 'center'); 
+%     dat_norm = rescale(dat_norm,-1,1); <---- Plots shifted if scaled.
     
     filename_short=split(filename,'.');
     filename_short=filename_short(1);
@@ -31,24 +34,24 @@ for i=1:length(AudioData)-1
     type=char(filename_split(2));
     depth=char(filename_split(3));
     
-    newrow={samp(end),type,depth(1:2),dat,dat_sg,fs_now,{}};
+    newrow={samp(end),type,depth(1:2),dat,dat_norm,dat_sg,fs_now,{}};
     T=[T;newrow];
 end
 
-%% Trim continuos data into percussion events
+%% Trim continuos data into percussion events by thresholding SG filtered signals
 threshold=0.5;
 fill_time=0.2;
 
-sample=T.SG_Data{1};
-
 for i=1:size(T,1)
     sample=T.SG_Data{i};
+    sample_norm=T.NormData{i};
+    
     idx=find(sample>threshold,length(sample),'first');
     ipts=findchangepts(idx,'Statistic','linear','MaxNumChanges',500);
     peaks=idx(ipts);
     
     for j=1:length(peaks)-1
-        clip{j,:}=sample(peaks(j)-fill_time*T.fs{i}:peaks(j+1)-fill_time*T.fs{i});
+        clip{j,:}=sample_norm(peaks(j)-fill_time*T.fs{i}:peaks(j+1)-fill_time*T.fs{i});
     end
     samplesz=cellfun(@length,clip,'uni',false);
     min_length(i)=min(cell2mat(samplesz));
@@ -118,8 +121,20 @@ ylabel('')
 end
 
 %% Spectrogram
-figure(1);
-for m = 23
-    [s,w,t,ps,fc,tc] = spectrogram(T.ClipMean(m,:));
-    spectrogram(T.ClipMean(m,:),'yaxis');
+% figure(1);
+% for m = 23
+%     [s,w,t,ps,fc,tc] = spectrogram(T.ClipMean(m,:));
+%     spectrogram(T.ClipMean(m,:),'yaxis');
+% end
+% 
+%% Plot Check
+
+sample_data=T.Clips{10};
+figure
+for i=1:length(sample_data)
+    plot(sample_data{i});
+    hold on
 end
+hold off
+    
+    
