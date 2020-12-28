@@ -36,7 +36,7 @@ if __name__ == "__main__":
             # Specify silent tap
             min_silence_len = 200,
             # Consider a tap silent if it's quieter than -30 dBFS.
-            silence_thresh = -30
+            silence_thresh = -40
         )
             
         # Process each tap with  parameters
