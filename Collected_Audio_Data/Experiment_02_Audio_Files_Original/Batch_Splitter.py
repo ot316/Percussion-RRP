@@ -33,10 +33,11 @@ if __name__ == "__main__":
         taps = split_on_silence (
             # Use the loaded audio.
             song, 
-            # Specify silent tap
+            # Specify silent period
             min_silence_len = 200,
-            # Consider a tap silent if it's quieter than -30 dBFS.
-            silence_thresh = -40
+            # Consider a period silent if it's quieter than -30 dBFS.
+            silence_thresh = -35,
+            keep_silence = 100
         )
             
         # Process each tap with  parameters
@@ -49,9 +50,9 @@ if __name__ == "__main__":
 
             # Export the audio tap with new bitrate.
             export = ".//{path}/{filename}_tap_{index}.wav".format(path = filepath, filename = filepath, index = i)
-            print("Exporting" +  export)    
+            #print("Exporting" +  export)    
             tap.export(export,      
                 bitrate = "192k",
                 format = "wav"
             )
-
+        print(i, " taps exported.")
