@@ -1,5 +1,5 @@
+
 % Author: Pilar Zhang Qiu
-% Description
 
 clc;
 clear all;
@@ -10,10 +10,10 @@ clear all;
 for k = 1:31
     % Create an audio file name, and read the file.
 	audionameA1 = ['Nodule_taps_short_' num2str(k) '.wav'];
-    
+
 	if exist(audionameA1, 'file')        
         [A{k},fs_now] = audioread(audionameA1);
-        
+
         dt = 1/fs_now;
         t_A{k} = 0:dt:(length(A{k})*dt)-dt;
 
@@ -26,10 +26,10 @@ end
 for k = 1:31
     % Create an audio file name, and read the file.
 	audionameB1 = ['No_Nodule_taps_short_' num2str(k) '.wav'];
-    
+
 	if exist(audionameB1, 'file')        
         [B{k},fs_now] = audioread(audionameB1);
-        
+
         dt = 1/fs_now;
         t_B{k} = 0:dt:(length(B{k})*dt)-dt;
 
@@ -51,15 +51,15 @@ for i = 3:A_col
     % monotonically increasing sequence in which the indices to the 
     % elements of the corresponding signal, x or y, are repeated the 
     % necessary number of times.
-    
+
     % The x-axis is time, and y-axis is amplitude
-    
+
     plot(iA_x{i},iA_y{i},'r');
     ylabel('Difference in amplitude');
     xlabel('Time')
     title('Difference between signals')
     set(gca,'FontSize',14)
-    
+
 %     figure(2);
 %     dtw(A{2},A{i});
 end
@@ -70,20 +70,20 @@ for i = 3:B_col
     % Each signal has a different time domain. Use dtw to align signals in
     % the Y-axis
     [distB{i}, iB_x{i}, iB_y{i}] = dtw(B{2},B{i});
-    
+
     % The vectors ix and iy have the same length. Each contains a 
     % monotonically increasing sequence in which the indices to the 
     % elements of the corresponding signal, x or y, are repeated the 
     % necessary number of times.
-    
+
     % The x-axis is time, and y-axis is amplitude
-    
+
     plot(iB_x{i},iB_y{i},'b');
     ylabel('Difference in amplitude');
     xlabel('Time')
     title('Difference between signals')
     set(gca,'FontSize',14)
-    
+
 %     figure(2);
 %     dtw(A{2},A{i});
 end
@@ -98,10 +98,10 @@ new_time = [1:39318];     % create your array
 for i = 3:A_col
     curr_iAx = iA_x{i};
     WarpPath_A = A{curr_iAx}; %i,curr_iAx
-    
+
     figure(2);
     plot(new_time,WarpPath_A,'b');
-    
+
     legend('Avg. Signal')
     xlabel('Sample Time(unitless)');
     ylabel('Amplitude');
@@ -238,7 +238,7 @@ set(gca,'FontSize',14)
 for i = 1:A_col
     %sgf_A_trimmed{i} = cellfun(fun,sgf_A)
     sgf_A_trimcurr = sgf_A{i};
-    
+
     sgf_A_trim(1,i) = {sgf_A_trimcurr(1:1000,:)};
     sgf_A_trim(2,i) = {sgf_A_trimcurr(1:25,:)};
     sgf_A_trim(3,i) = {sgf_A_trimcurr(25:50-1,:)};
@@ -286,7 +286,7 @@ end
 for i = 1:B_col
 
     sgf_B_trimcurr = sgf_B{i};
-    
+
     sgf_B_trim(1,i) = {sgf_B_trimcurr(1:1000,:)};
     sgf_B_trim(2,i) = {sgf_B_trimcurr(1:25,:)};
     sgf_B_trim(3,i) = {sgf_B_trimcurr(25:50-1,:)};
@@ -344,9 +344,9 @@ end
 % ---------------------------- A
 for i = 2:41    % For every time step
     for k = 1:A_col    % For every audio file
-        
+
         sgf_A_T_AvgRows_curr(:,i-1,k) = sgf_A_trim{i,k};    % sgf_A_trim are time bands
-    
+
         A_Sum_Rcurr = sum(sgf_A_T_AvgRows_curr, 3);
         [AS_row, AS_col] = size(A_Sum_Rcurr);
 
@@ -364,9 +364,9 @@ end
 % ---------------------------- B
 for i = 2:41    % For every time step
     for k = 1:B_col    % For every audio file
-        
+
         sgf_B_T_AvgRows_curr(:,i-1,k) = sgf_B_trim{i,k};    % sgf_A_trim are time bands
-    
+
         B_Sum_Rcurr = sum(sgf_B_T_AvgRows_curr, 3);
         [BS_row, BS_col] = size(B_Sum_Rcurr);
 
@@ -501,10 +501,10 @@ for i = 1:20    % For every time step
     i3 = 3 + (i-1)*5;
     i4 = 4 + (i-1)*5;
     i5 = 5 + (i-1)*5;
-    
+
 %     Rdc_MRows_A(1,i) = (MRows_A(i1) + MRows_A(i2) + MRows_A(i3) + MRows_A(i4) + MRows_A(i5))/5
 %     Rdc_MRows_B(1,i) = (MRows_B(i1) + MRows_B(i2) + MRows_B(i3) + MRows_B(i4) + MRows_B(i5))/5
-    
+
     Rdc_MRows_A(1,i) = abs(MRows_A(i1)) + abs(MRows_A(i2)) + abs(MRows_A(i3)) + abs(MRows_A(i4)) + abs(MRows_A(i5))/5;
     Rdc_MRows_B(1,i) = abs(MRows_B(i1)) + abs(MRows_B(i2)) + abs(MRows_B(i3)) + abs(MRows_B(i4)) + abs(MRows_B(i5))/5;
 end
@@ -539,7 +539,7 @@ for i = 1:10    % For every time step
     i8 = 8 + (i-1)*10;
     i9 = 9 + (i-1)*10;
     i10 = 10 + (i-1)*10;
-    
+
     Rdc_MRows_A(1,i) = (abs(MRows_A(i1)) + abs(MRows_A(i2)) + abs(MRows_A(i3)) + abs(MRows_A(i4)) + abs(MRows_A(i5)) + abs(MRows_A(i6)) + abs(MRows_A(i7)) + abs(MRows_A(i8)) + abs(MRows_A(i9)) + abs(MRows_A(i10)))/10
     Rdc_MRows_B(1,i) = (abs(MRows_B(i1)) + abs(MRows_B(i2)) + abs(MRows_B(i3)) + abs(MRows_B(i4)) + abs(MRows_B(i5)) + abs(MRows_B(i6)) + abs(MRows_B(i7)) + abs(MRows_B(i8)) + abs(MRows_B(i9)) + abs(MRows_B(i10)))/10
 end
@@ -584,7 +584,7 @@ for i = 1:5    % For every time step
     i18 = 18 + (i-1)*20;
     i19 = 19 + (i-1)*20;
     i20 = 20 + (i-1)*20;
-    
+
     Rdc_MRows_A(1,i) = (abs(MRows_A(i1)) + abs(MRows_A(i2)) + abs(MRows_A(i3)) + abs(MRows_A(i4)) + abs(MRows_A(i5)) + abs(MRows_A(i6)) + abs(MRows_A(i7)) + abs(MRows_A(i8)) + abs(MRows_A(i9)) + abs(MRows_A(i10)) ...
         + abs(MRows_A(i11))+abs(MRows_A(i12))+abs(MRows_A(i13))+abs(MRows_A(i14))+abs(MRows_A(i15))+abs(MRows_A(i16))+abs(MRows_A(i17))+abs(MRows_A(i18))+abs(MRows_A(i19))+abs(MRows_A(i20)))/20
     Rdc_MRows_B(1,i) = (abs(MRows_B(i1)) + abs(MRows_B(i2)) + abs(MRows_B(i3)) + abs(MRows_B(i4)) + abs(MRows_B(i5)) + abs(MRows_B(i6)) + abs(MRows_B(i7)) + abs(MRows_B(i8)) + abs(MRows_B(i9)) + abs(MRows_B(i10)) ...
