@@ -45,4 +45,3 @@ np.save('X_train', X_train)
 np.save('X_test', X_test)
 np.save('y_train', y_train)
 np.save('y_test', y_test)
-
